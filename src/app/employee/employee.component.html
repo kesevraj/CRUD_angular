@@ -1,0 +1,139 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div><h5 class="text-center bg-primary text-white">Add Employee</h5></div>
+      <div class="form" style="overflow: hidden;">
+        <form [formGroup]="data" name="data">
+          <!-- name -->
+          <div class="form-group">
+            <label>Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              formControlName="Name"
+              [(ngModel)]="Name"
+              id="name"
+              placeholder="ex:name"
+            />
+          </div>
+          <!-- error message -->
+          <div
+            class="text-danger "
+            *ngIf="
+              this.data.controls.Name.invalid &&
+              (this.data.controls.Name.touched || this.data.controls.Name.dirty)
+            "
+          >
+            <small class="text-danger" *ngIf="!this.data.controls.Name.valid"
+              >Enter a valid Name</small
+            >
+          </div>
+
+          <!-- email -->
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input
+              type="email"
+              class="form-control"
+              formControlName="email"
+              [(ngModel)]="email"
+              placeholder="ex:abc@gmail.com"
+            />
+          </div>
+          <!-- error message -->
+          <div
+            class="text-danger "
+            *ngIf="
+              this.data.controls.email.invalid &&
+              (this.data.controls.email.touched ||
+                this.data.controls.email.dirty)
+            "
+          >
+            <small class="text-danger" *ngIf="!this.data.controls.email.valid"
+              >Enter a valid Email
+            </small>
+          </div>
+
+          <!-- password -->
+          <div class="form-group">
+            <label for="pwd">Mobile Number:</label>
+            <input
+              class="form-control"
+              formControlName="password"
+              [(ngModel)]="pass"
+              placeholder="ex:9876543210"
+            />
+          </div>
+          <!-- error message -->
+          <div
+            class="text-danger "
+            *ngIf="
+              this.data.controls.password.invalid &&
+              (this.data.controls.password.touched ||
+                this.data.controls.password.dirty)
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="!this.data.controls.password.valid"
+              >Enter a valid Number
+            </small>
+          </div>
+          <!-- submit button -->
+          <input
+            type="submit"
+            class="btn btn-primary"
+            *ngIf="this.data.valid && !updateval"
+            id="submitbt"
+            (click)="add(this.data.value.email)"
+          />
+          <!-- update b utton -->
+          <button
+            type="button"
+            class="btn btn-primary ml-3"
+            *ngIf="this.data.valid && updateval"
+            id="updatebt"
+            (click)="update(this.data.value.email)"
+          >
+            update
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 m-2">
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Serial.no</th>
+            <th scope="col">Name</th>
+            <th scope="col">email</th>
+            <th scope="col">Mobile Number</th>
+            <th>Delete employee</th>
+            <th>Edit employee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let card of cards; let itx = index">
+            <th scope="row">{{ itx + 1 }}</th>
+            <td>{{ card.Name }}</td>
+            <!--{{Name}} -->
+            <td>{{ card.email }}</td>
+            <td>{{ card.password }}</td>
+            <td>
+              <button class="btn btn-danger" (click)="del(card._id)">
+                Delete 
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-primary" (click)="up(card._id)">
+                Update 
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+</div>
